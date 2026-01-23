@@ -1,44 +1,70 @@
-# Image Conversor — carpeta `image-conversor`
+# 🚀 OMEGA Image Converter (v0.15)
 
-Descripción
+> **Una suite profesional de escritorio para inspección, optimización, edición no destructiva y conversión masiva de imágenes.**
 
-- Conjunto de utilidades GUI para inspección, redimensionado, conversión y exportación de imágenes. La versión más reciente incluye un inspector visual con zoom/cortina, presets guardables (`presets.json`) y procesamiento por lotes.
+El **OMEGA Image Converter** es una herramienta GUI avanzada escrita en Python. Está diseñada para creadores de contenido, desarrolladores web y diseñadores que necesitan un control granular sobre la compresión de sus imágenes, soportando desde formatos estándar hasta formatos de última generación como AVIF y HEIC.
 
-Características (basadas en `9_escalas_presets_modos.py`)
+## ✨ Características Principales
 
-- Inspector avanzado que muestra comparación lado a lado (original vs procesado) con control deslizante y zoom.
-- Soporte para formatos modernos (`AVIF`, `HEIC`) y plugins (`pillow-avif-plugin`, `pillow-heif`).
-- Presets guardables en `presets.json` y aplicación de presets a items seleccionados.
-- Controles de calidad, escala, subsampling, convertir a B/N, rotación/flip, marca de agua y renombrado por prefijo.
-- Batch processing con selección de carpeta de salida y guardado optimizado (calidad y conversión automática).
+- **🔍 Inspector Visual Avanzado (Modo Cortina):** Compara el original y el resultado píxel por píxel con un efecto cortina, zoom dinámico (rueda del mouse) y desplazamiento (clic y arrastrar).
+- **💾 Sistema de Presets:** Guarda tus configuraciones favoritas (formato, escala, calidad, marca de agua) en un archivo `presets.json` para reutilizarlas con un solo clic.
+- **⚡ Procesamiento por Lotes:** Aplica configuraciones globalmente a cientos de imágenes o de forma granular (una por una) y expórtalas en segundos.
+- **🛠️ Edición Rápida No Destructiva:** Rota, voltea y convierte a Blanco/Negro con un solo clic antes de exportar.
+- **©️ Marca de Agua y Renombrado:** Agrega texto con opacidad personalizada y prefijos a los nombres de los archivos exportados.
+- **📦 Optimización Extrema:** Soporte para Subsampling (Chroma 4:2:0) para reducir drásticamente el peso de la imagen y opción para mantener o eliminar metadatos EXIF.
 
-Requisitos
+## 🗂️ Formatos Soportados
 
-- Python 3.8+
-- Paquetes: `ttkbootstrap`, `Pillow`, `pillow-avif-plugin`, `pillow-heif` (el script intenta instalarlos si faltan).
+| Formatos Web Modernos       | Formatos Clásicos       | Formatos de Diseño   |
+| :-------------------------- | :---------------------- | :------------------- |
+| **AVIF** (Ultra compresión) | **JPEG / JPG**          | **PSD** (Photoshop)  |
+| **HEIC** (Apple/iOS)        | **PNG** (Transparencia) | **PDF** (Documento)  |
+| **WEBP** (Google)           | **GIF** (Animado)       | **EPS** (PostScript) |
+| **JPEG 2000**               | **BMP / ICO**           | **TIFF / TGA**       |
 
-Uso
+---
 
-- Ejecutar la versión más reciente (ejemplo):
+## ⚙️ Requisitos e Instalación
+
+El script cuenta con un **Auto-Instalador**. Al ejecutarlo por primera vez, intentará descargar automáticamente las dependencias necesarias.
+
+**Requisitos del sistema:**
+
+- Python 3.8 o superior.
+
+**Dependencias (instaladas automáticamente):**
+
+- `ttkbootstrap` (Interfaz gráfica moderna)
+- `Pillow` (Procesamiento de imagen base)
+- `pillow-avif-plugin` (Soporte AVIF)
+- `pillow-heif` (Soporte HEIC)
+
+### Ejecución
 
 ```bash
-python dev/scripts/image-conversor/<latest_num>_<fixed_name>.py
+python 9_escalas_presets_modos.py
 ```
 
-Flujo típico
+## 📖 Guía de Uso Rápida
 
-1. `➕ Agregar` — seleccionar archivos a procesar.
-2. Ajustar formato, calidad y escala; usar `Guardar Preset` si quieres reutilizar.
-3. `PROCESAR LOTE` — genera los archivos convertidos en la carpeta de salida.
-4. `Inspector` — abrir vista comparativa para asegurar cambios antes de exportar.
+1. **Agregar:** Haz clic en `➕ Agregar` y selecciona las imágenes.
+2. **Configurar:** Selecciona una imagen de la lista y ajusta su formato, calidad y escala. Si deseas aplicar esto a todo el lote, usa el botón `⚡ APLICAR GLOBAL`.
+3. **Inspeccionar:** Haz clic sobre la imagen de "Vista Previa" para abrir el **Inspector Omega**. Desliza el mouse para ver la diferencia de calidad y peso antes de guardar.
+4. **Marca de Agua (Opcional):** Ve a la pestaña "Marca & Salida" para configurar tu marca de agua y prefijo de renombrado.
+5. **Exportar:** Elige tu carpeta de salida y presiona `🚀 PROCESAR LOTE`.
 
-Evolución (resumen)
+---
 
-- V1..V3: Soporte básico de formatos y UI mejorada.
-- Versiones intermedias: soporte PSD/EPS, mejoras en UX para porcentaje vs pixeles, y modo inspector.
-- V9: `9_escalas_presets_modos.py` — implementación de inspector, presets, soporte HEIF/AVIF y optimizaciones de lote.
+## 📈 Evolución del Proyecto (Changelog)
 
-Consejos
+- **v1-v3:** Soporte inicial de formatos (AVIF/HEIC) y mejora de la interfaz gráfica con colas de archivos.
+- **v4-v5:** Introducción de configuraciones granulares (individual vs global) e inspector de imágenes grandes con scroll sincronizado.
+- **v6-v8:** Implementación del Inspector con Zoom y efecto cortina, subsampling 4:2:0, prefijos y marcas de agua.
+- **v9 (Actual):** Consolidación final "OMEGA". Edición no destructiva (rotación/espejo/BN), integración del sistema de Presets JSON y optimización del flujo de trabajo por lotes.
 
-- Si trabajas con AVIF/HEIC asegúrate de tener los plugins `pillow-avif-plugin` y `pillow-heif` instalados.
-- Para grandes lotes, prueba primero con 1-2 imágenes y revisa `presets.json`.
+---
+
+### 💡 Consejos
+
+- Si notas que el archivo pesa demasiado para web, activa el **Modo Ahorro (4:2:0)** en la pestaña de edición.
+- Para grandes lotes de imágenes, prueba primero con 1 o 2 imágenes usando el Inspector para asegurar que la compresión no degrade detalles importantes.
