@@ -6,6 +6,8 @@ El **OMEGA Image Converter** es una herramienta GUI avanzada escrita en Python. 
 
 ![1769206907712](images/README/1769206907712.png)
 
+![1769207328325](images/README/1769207328325.png)
+
 ![1769206967488](images/README/1769206967488.png)
 
 ![1769206951282](images/README/1769206951282.png)

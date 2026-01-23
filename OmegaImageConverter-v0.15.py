@@ -167,7 +167,7 @@ class ImageItem:
 class UniversalOmegaConverter:
     def __init__(self, root):
         self.root = root
-        self.root.title("Tarquitet - OMEGA Converter V6")
+        self.root.title("Tarquitet - OMEGA Converter V0.15")
         self.root.geometry("1600x980")
         
         self.items = []; self.current_item = None
