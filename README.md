@@ -4,6 +4,12 @@
 
 El **OMEGA Image Converter** es una herramienta GUI avanzada escrita en Python. Está diseñada para creadores de contenido, desarrolladores web y diseñadores que necesitan un control granular sobre la compresión de sus imágenes, soportando desde formatos estándar hasta formatos de última generación como AVIF y HEIC.
 
+![1769206907712](images/README/1769206907712.png)
+
+![1769206967488](images/README/1769206967488.png)
+
+![1769206951282](images/README/1769206951282.png)
+
 ## ✨ Características Principales (Actualizado v15)
 
 - **📏 Redimensionado Exacto por Píxeles:** Control total sobre el tamaño final. Cambia las dimensiones especificando el Ancho (Width) y Alto (Height) exactos en píxeles, abandonando el antiguo método por porcentajes.
@@ -70,26 +76,29 @@ python 15_better_ux_change_percent_2_px.py
 
 Este proyecto no sería posible sin el increíble trabajo de la comunidad de código abierto. OMEGA Image Converter hace uso de las siguientes librerías de terceros:
 
-- **[Pillow (PIL Fork)](https://python-pillow.org/)**
+- **Asistencia de Inteligencia Artificial (Google Gemini)**
+  - **Uso:** Asistencia en la optimización de algoritmos, refactorización de código multihilo, y estructuración de la documentación técnica.
+
+* **[Pillow (PIL Fork)](https://python-pillow.org/)**
   - **Uso:** El motor principal de procesamiento, redimensionado y manipulación de píxeles.
   - **Licencia:** [HPND License](https://raw.githubusercontent.com/python-pillow/Pillow/main/LICENSE) (Compatible con uso comercial).
   - **Créditos:** Alex Clark y los contribuidores de Pillow.
 
-- **[ttkbootstrap](https://ttkbootstrap.readthedocs.io/)**
+* **[ttkbootstrap](https://ttkbootstrap.readthedocs.io/)**
   - **Uso:** El framework que le da la interfaz gráfica moderna, los temas oscuros y los controles avanzados (sliders, botones, barras de progreso).
   - **Licencia:** [MIT License](https://github.com/israel-dryer/ttkbootstrap/blob/master/LICENSE).
   - **Créditos:** Israel Dryer.
 
-- **[pillow-heif](https://github.com/bigcat88/pillow_heif)**
+* **[pillow-heif](https://github.com/bigcat88/pillow_heif)**
   - **Uso:** El plugin que permite leer y escribir el formato de alta eficiencia de Apple (HEIC/HEIF).
   - **Licencia:** [BSD 3-Clause License](https://github.com/bigcat88/pillow_heif/blob/master/LICENSE.txt).
   - **Créditos:** Alexander Piskun (bigcat88).
 
-- **[pillow-avif-plugin](https://github.com/fdintino/pillow-avif-plugin)**
+* **[pillow-avif-plugin](https://github.com/fdintino/pillow-avif-plugin)**
   - **Uso:** El plugin que habilita la compresión y descompresión del formato web de ultra-rendimiento AVIF.
   - **Licencia:** [MIT License](https://github.com/fdintino/pillow-avif-plugin/blob/master/LICENSE).
   - **Créditos:** Frankie Dintino.
 
-- **Python Standard Library** (`tkinter`, `threading`, `io`, `os`, `sys`)
+* **Python Standard Library** (`tkinter`, `threading`, `io`, `os`, `sys`)
   - **Uso:** Gestión del sistema de archivos, multihilo (multicore) y operaciones nativas.
   - **Licencia:** [Python Software Foundation License](https://docs.python.org/3/license.html).
