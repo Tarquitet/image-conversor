@@ -65,3 +65,31 @@ python 15_better_ux_change_percent_2_px.py
 
 - **Aprovecha el Multihilo:** Para carpetas con cientos de fotos (ej. galerías de eventos o e-commerce), la versión 15 reducirá tu tiempo de espera drásticamente en comparación con las versiones anteriores.
 - **Web Core Vitals:** Si optimizas para web, exporta en **AVIF** con **Modo Ahorro (4:2:0)** para obtener las mejores puntuaciones en Google PageSpeed.
+
+## ⚖️ Créditos y Licencias de Código Abierto
+
+Este proyecto no sería posible sin el increíble trabajo de la comunidad de código abierto. OMEGA Image Converter hace uso de las siguientes librerías de terceros:
+
+- **[Pillow (PIL Fork)](https://python-pillow.org/)**
+  - **Uso:** El motor principal de procesamiento, redimensionado y manipulación de píxeles.
+  - **Licencia:** [HPND License](https://raw.githubusercontent.com/python-pillow/Pillow/main/LICENSE) (Compatible con uso comercial).
+  - **Créditos:** Alex Clark y los contribuidores de Pillow.
+
+- **[ttkbootstrap](https://ttkbootstrap.readthedocs.io/)**
+  - **Uso:** El framework que le da la interfaz gráfica moderna, los temas oscuros y los controles avanzados (sliders, botones, barras de progreso).
+  - **Licencia:** [MIT License](https://github.com/israel-dryer/ttkbootstrap/blob/master/LICENSE).
+  - **Créditos:** Israel Dryer.
+
+- **[pillow-heif](https://github.com/bigcat88/pillow_heif)**
+  - **Uso:** El plugin que permite leer y escribir el formato de alta eficiencia de Apple (HEIC/HEIF).
+  - **Licencia:** [BSD 3-Clause License](https://github.com/bigcat88/pillow_heif/blob/master/LICENSE.txt).
+  - **Créditos:** Alexander Piskun (bigcat88).
+
+- **[pillow-avif-plugin](https://github.com/fdintino/pillow-avif-plugin)**
+  - **Uso:** El plugin que habilita la compresión y descompresión del formato web de ultra-rendimiento AVIF.
+  - **Licencia:** [MIT License](https://github.com/fdintino/pillow-avif-plugin/blob/master/LICENSE).
+  - **Créditos:** Frankie Dintino.
+
+- **Python Standard Library** (`tkinter`, `threading`, `io`, `os`, `sys`)
+  - **Uso:** Gestión del sistema de archivos, multihilo (multicore) y operaciones nativas.
+  - **Licencia:** [Python Software Foundation License](https://docs.python.org/3/license.html).
