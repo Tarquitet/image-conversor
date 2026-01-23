@@ -1,17 +1,18 @@
 # 🚀 OMEGA Image Converter (v0.15)
 
-> **Una suite profesional de escritorio para inspección, optimización, edición no destructiva y conversión masiva de imágenes.**
+> **Una suite profesional de escritorio para inspección, optimización multihilo, edición no destructiva y conversión masiva de imágenes.**
 
 El **OMEGA Image Converter** es una herramienta GUI avanzada escrita en Python. Está diseñada para creadores de contenido, desarrolladores web y diseñadores que necesitan un control granular sobre la compresión de sus imágenes, soportando desde formatos estándar hasta formatos de última generación como AVIF y HEIC.
 
-## ✨ Características Principales
+## ✨ Características Principales (Actualizado v15)
 
-- **🔍 Inspector Visual Avanzado (Modo Cortina):** Compara el original y el resultado píxel por píxel con un efecto cortina, zoom dinámico (rueda del mouse) y desplazamiento (clic y arrastrar).
-- **💾 Sistema de Presets:** Guarda tus configuraciones favoritas (formato, escala, calidad, marca de agua) en un archivo `presets.json` para reutilizarlas con un solo clic.
-- **⚡ Procesamiento por Lotes:** Aplica configuraciones globalmente a cientos de imágenes o de forma granular (una por una) y expórtalas en segundos.
-- **🛠️ Edición Rápida No Destructiva:** Rota, voltea y convierte a Blanco/Negro con un solo clic antes de exportar.
-- **©️ Marca de Agua y Renombrado:** Agrega texto con opacidad personalizada y prefijos a los nombres de los archivos exportados.
-- **📦 Optimización Extrema:** Soporte para Subsampling (Chroma 4:2:0) para reducir drásticamente el peso de la imagen y opción para mantener o eliminar metadatos EXIF.
+- **📏 Redimensionado Exacto por Píxeles:** Control total sobre el tamaño final. Cambia las dimensiones especificando el Ancho (Width) y Alto (Height) exactos en píxeles, abandonando el antiguo método por porcentajes.
+- **🚀 Procesamiento Multihilo (Multi-core):** Aprovecha todos los núcleos de tu procesador para convertir lotes gigantes de imágenes a una velocidad optimizada.
+- **🔍 Inspector Visual Avanzado (Modo Cortina):** Compara el original y el resultado píxel por píxel con un efecto cortina, zoom dinámico y analítica de datos completos al hacer clic.
+- **🧹 Gestión de Lista Avanzada:** Elimina imágenes específicas de la cola de trabajo de forma individual con un solo clic.
+- **💾 Sistema de Presets:** Guarda tus configuraciones favoritas en un archivo `presets.json` para reutilizarlas instantáneamente.
+- **©️ Inserción de Logos y Marcas de Agua:** Agrega logos PNG o texto con opacidad personalizada a tus exportaciones.
+- **📦 Optimización Extrema:** Soporte para Subsampling (Chroma 4:2:0) para reducir drásticamente el peso de la imagen y reportes visuales del porcentaje exacto de peso ahorrado.
 
 ## 🗂️ Formatos Soportados
 
@@ -21,8 +22,6 @@ El **OMEGA Image Converter** es una herramienta GUI avanzada escrita en Python. 
 | **HEIC** (Apple/iOS)        | **PNG** (Transparencia) | **PDF** (Documento)  |
 | **WEBP** (Google)           | **GIF** (Animado)       | **EPS** (PostScript) |
 | **JPEG 2000**               | **BMP / ICO**           | **TIFF / TGA**       |
-
----
 
 ## ⚙️ Requisitos e Instalación
 
@@ -42,29 +41,27 @@ El script cuenta con un **Auto-Instalador**. Al ejecutarlo por primera vez, inte
 ### Ejecución
 
 ```bash
-python 9_escalas_presets_modos.py
+python 15_better_ux_change_percent_2_px.py
 ```
 
 ## 📖 Guía de Uso Rápida
 
-1. **Agregar:** Haz clic en `➕ Agregar` y selecciona las imágenes.
-2. **Configurar:** Selecciona una imagen de la lista y ajusta su formato, calidad y escala. Si deseas aplicar esto a todo el lote, usa el botón `⚡ APLICAR GLOBAL`.
-3. **Inspeccionar:** Haz clic sobre la imagen de "Vista Previa" para abrir el **Inspector Omega**. Desliza el mouse para ver la diferencia de calidad y peso antes de guardar.
-4. **Marca de Agua (Opcional):** Ve a la pestaña "Marca & Salida" para configurar tu marca de agua y prefijo de renombrado.
-5. **Exportar:** Elige tu carpeta de salida y presiona `🚀 PROCESAR LOTE`.
-
----
+1. **Agregar y Limpiar:** Haz clic en `➕ Agregar` para seleccionar imágenes. Si te equivocas con alguna, usa la `❌` individual para quitarla de la lista.
+2. **Configurar Dimensiones y Calidad:** Selecciona una imagen y ajusta su nuevo ancho/alto en píxeles. Si deseas aplicar esto a todo el lote, usa `⚡ APLICAR GLOBAL`.
+3. **Inspeccionar Ahorro:** Revisa la barra de información para ver el porcentaje exacto de peso ahorrado. Haz clic en la "Vista Previa" para abrir el **Inspector Omega** a pantalla completa.
+4. **Exportación Multihilo:** Elige tu carpeta de salida y presiona `🚀 PROCESAR LOTE`. El motor multihilo procesará las imágenes en paralelo.
 
 ## 📈 Evolución del Proyecto (Changelog)
 
-- **v1-v3:** Soporte inicial de formatos (AVIF/HEIC) y mejora de la interfaz gráfica con colas de archivos.
-- **v4-v5:** Introducción de configuraciones granulares (individual vs global) e inspector de imágenes grandes con scroll sincronizado.
-- **v6-v8:** Implementación del Inspector con Zoom y efecto cortina, subsampling 4:2:0, prefijos y marcas de agua.
-- **v9 (Actual):** Consolidación final "OMEGA". Edición no destructiva (rotación/espejo/BN), integración del sistema de Presets JSON y optimización del flujo de trabajo por lotes.
-
----
+- **v1-v5:** Soporte inicial de formatos (AVIF/HEIC), mejora de la GUI e inspector de imágenes grandes.
+- **v6-v9:** Implementación del Inspector con Zoom, efecto cortina, presets JSON y edición no destructiva.
+- **v10:** Soporte para colores web y superposición de logos PNG.
+- **v11:** Mejora en la visualización de datos de compresión (porcentaje ahorrado).
+- **v12:** Integración del motor de procesamiento Multicore (Multihilo) para optimización de velocidad.
+- **v13-v14:** Mejoras de UX para permitir el cierre/eliminación de imágenes individuales de la lista.
+- **v15 (Actual):** Refactorización de la escala: Transición del redimensionamiento porcentual al control exacto por dimensiones en Píxeles (Ancho x Alto).
 
 ### 💡 Consejos
 
-- Si notas que el archivo pesa demasiado para web, activa el **Modo Ahorro (4:2:0)** en la pestaña de edición.
-- Para grandes lotes de imágenes, prueba primero con 1 o 2 imágenes usando el Inspector para asegurar que la compresión no degrade detalles importantes.
+- **Aprovecha el Multihilo:** Para carpetas con cientos de fotos (ej. galerías de eventos o e-commerce), la versión 15 reducirá tu tiempo de espera drásticamente en comparación con las versiones anteriores.
+- **Web Core Vitals:** Si optimizas para web, exporta en **AVIF** con **Modo Ahorro (4:2:0)** para obtener las mejores puntuaciones en Google PageSpeed.
