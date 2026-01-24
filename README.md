@@ -49,7 +49,7 @@ El script cuenta con un **Auto-Instalador**. Al ejecutarlo por primera vez, inte
 ### Ejecución
 
 ```bash
-python 15_better_ux_change_percent_2_px.py
+python Latest_<NAME>_<VERSION>.py
 ```
 
 ## 📖 Guía de Uso Rápida
