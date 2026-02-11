@@ -4,13 +4,13 @@
 
 El **OMEGA Image Converter** es una herramienta GUI avanzada escrita en Python. Está diseñada para creadores de contenido, desarrolladores web y diseñadores que necesitan un control granular sobre la compresión de sus imágenes, soportando desde formatos estándar hasta formatos de última generación como AVIF y HEIC.
 
-![1769206907712](images/README/1769206907712.png)
+![1769206907712](images/README/1769206907712.avif)
 
-![1769207328325](images/README/1769207328325.png)
+![1769207328325](images/README/1769207328325.avif)
 
-![1769206967488](images/README/1769206967488.png)
+![1769206967488](images/README/1769206967488.avif)
 
-![1769206951282](images/README/1769206951282.png)
+![1769206951282](images/README/1769206951282.avif)
 
 ## ✨ Características Principales (Actualizado v15)
 
