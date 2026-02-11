@@ -34,12 +34,3 @@ output/
 
 # Ignorar tus configuraciones personales
 presets.json
-
-# Ignorar imágenes de prueba temporales que dejes sueltas en la carpeta
-*.jpg
-*.jpeg
-*.png
-*.avif
-*.heic
-*.webp
-*.gif
