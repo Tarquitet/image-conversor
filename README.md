@@ -1,106 +1,50 @@
 # 🚀 OMEGA Image Converter (v0.15)
 
-> **Una suite profesional de escritorio para inspección, optimización multihilo, edición no destructiva y conversión masiva de imágenes.**
+> **A professional suite for inspection, multithreaded optimization, non-destructive edits and bulk image conversion.**
 
-El **OMEGA Image Converter** es una herramienta GUI avanzada escrita en Python. Está diseñada para creadores de contenido, desarrolladores web y diseñadores que necesitan un control granular sobre la compresión de sus imágenes, soportando desde formatos estándar hasta formatos de última generación como AVIF y HEIC.
+OMEGA Image Converter is an advanced desktop tool written in Python for creators who need fine-grained control over image compression and conversion (including modern formats like AVIF and HEIC).
 
 ![1770839881735 a](images/README/1770839881735.png)
 
-![1769207328325 b](images/README/1769207328325.avif)
+## ✨ Main Features (v15)
 
-![1769206967488 c](images/README/1769206967488.avif)
+- **Exact Pixel Resizing:** Control final dimensions by exact pixels (width × height).
+- **Multithreaded Processing:** Uses all CPU cores for fast batch conversion.
+- **Advanced Visual Inspector:** Side-by-side comparison with curtain effect and pixel-level zoom.
+- **Presets System:** Save export settings in `presets.json`.
+- **Watermark/Logo Insertion:** Add PNG logos or text with opacity control.
+- **Extreme Optimization:** Supports chroma subsampling (4:2:0) to reduce weight for web.
 
-![1769206951282 d](images/README/1769206951282.avif)
+## Supported Formats
 
-## ✨ Características Principales (Actualizado v15)
+- AVIF, HEIC, WEBP, JPEG/JPG, PNG, GIF, PSD, PDF, EPS, TIFF, BMP, ICO, JPEG2000
 
-- **📏 Redimensionado Exacto por Píxeles:** Control total sobre el tamaño final. Cambia las dimensiones especificando el Ancho (Width) y Alto (Height) exactos en píxeles, abandonando el antiguo método por porcentajes.
-- **🚀 Procesamiento Multihilo (Multi-core):** Aprovecha todos los núcleos de tu procesador para convertir lotes gigantes de imágenes a una velocidad optimizada.
-- **🔍 Inspector Visual Avanzado (Modo Cortina):** Compara el original y el resultado píxel por píxel con un efecto cortina, zoom dinámico y analítica de datos completos al hacer clic.
-- **🧹 Gestión de Lista Avanzada:** Elimina imágenes específicas de la cola de trabajo de forma individual con un solo clic.
-- **💾 Sistema de Presets:** Guarda tus configuraciones favoritas en un archivo `presets.json` para reutilizarlas instantáneamente.
-- **©️ Inserción de Logos y Marcas de Agua:** Agrega logos PNG o texto con opacidad personalizada a tus exportaciones.
-- **📦 Optimización Extrema:** Soporte para Subsampling (Chroma 4:2:0) para reducir drásticamente el peso de la imagen y reportes visuales del porcentaje exacto de peso ahorrado.
+---
 
-## 🗂️ Formatos Soportados
+## ⚙️ Requirements & Installation
 
-| Formatos Web Modernos       | Formatos Clásicos       | Formatos de Diseño   |
-| :-------------------------- | :---------------------- | :------------------- |
-| **AVIF** (Ultra compresión) | **JPEG / JPG**          | **PSD** (Photoshop)  |
-| **HEIC** (Apple/iOS)        | **PNG** (Transparencia) | **PDF** (Documento)  |
-| **WEBP** (Google)           | **GIF** (Animado)       | **EPS** (PostScript) |
-| **JPEG 2000**               | **BMP / ICO**           | **TIFF / TGA**       |
+- Python 3.8 or newer.
 
-## ⚙️ Requisitos e Instalación
+The tool includes an auto-installer that will fetch required packages on first run.
 
-El script cuenta con un **Auto-Instalador**. Al ejecutarlo por primera vez, intentará descargar automáticamente las dependencias necesarias.
+**Dependencies:** `ttkbootstrap`, `Pillow`, `pillow-avif-plugin`, `pillow-heif`.
 
-**Requisitos del sistema:**
-
-- Python 3.8 o superior.
-
-**Dependencias (instaladas automáticamente):**
-
-- `ttkbootstrap` (Interfaz gráfica moderna)
-- `Pillow` (Procesamiento de imagen base)
-- `pillow-avif-plugin` (Soporte AVIF)
-- `pillow-heif` (Soporte HEIC)
-
-### Ejecución
+Run:
 
 ```bash
 python Latest_<NAME>_<VERSION>.py
 ```
 
-## 📖 Guía de Uso Rápida
+[![Leer en Español](https://img.shields.io/badge/Leer%20en%20Espa%C3%B1ol-ES-blue?style=flat-square&logo=github)](README_es.md)
 
-1. **Agregar y Limpiar:** Haz clic en `➕ Agregar` para seleccionar imágenes. Si te equivocas con alguna, usa la `❌` individual para quitarla de la lista.
-2. **Configurar Dimensiones y Calidad:** Selecciona una imagen y ajusta su nuevo ancho/alto en píxeles. Si deseas aplicar esto a todo el lote, usa `⚡ APLICAR GLOBAL`.
-3. **Inspeccionar Ahorro:** Revisa la barra de información para ver el porcentaje exacto de peso ahorrado. Haz clic en la "Vista Previa" para abrir el **Inspector Omega** a pantalla completa.
-4. **Exportación Multihilo:** Elige tu carpeta de salida y presiona `🚀 PROCESAR LOTE`. El motor multihilo procesará las imágenes en paralelo.
+## Quick Usage
 
-## 📈 Evolución del Proyecto (Changelog)
+- Add images with ➕. Remove wrong entries with ❌.
+- Configure dimensions or apply global presets.
+- Preview savings and run batch export.
 
-- **v1-v5:** Soporte inicial de formatos (AVIF/HEIC), mejora de la GUI e inspector de imágenes grandes.
-- **v6-v9:** Implementación del Inspector con Zoom, efecto cortina, presets JSON y edición no destructiva.
-- **v10:** Soporte para colores web y superposición de logos PNG.
-- **v11:** Mejora en la visualización de datos de compresión (porcentaje ahorrado).
-- **v12:** Integración del motor de procesamiento Multicore (Multihilo) para optimización de velocidad.
-- **v13-v14:** Mejoras de UX para permitir el cierre/eliminación de imágenes individuales de la lista.
-- **v15 (Actual):** Refactorización de la escala: Transición del redimensionamiento porcentual al control exacto por dimensiones en Píxeles (Ancho x Alto).
+## Changelog
 
-### 💡 Consejos
-
-- **Aprovecha el Multihilo:** Para carpetas con cientos de fotos (ej. galerías de eventos o e-commerce), la versión 15 reducirá tu tiempo de espera drásticamente en comparación con las versiones anteriores.
-- **Web Core Vitals:** Si optimizas para web, exporta en **AVIF** con **Modo Ahorro (4:2:0)** para obtener las mejores puntuaciones en Google PageSpeed.
-
-## ⚖️ Créditos y Licencias de Código Abierto
-
-Este proyecto no sería posible sin el increíble trabajo de la comunidad de código abierto. OMEGA Image Converter hace uso de las siguientes librerías de terceros:
-
-- **Asistencia de Inteligencia Artificial (Google Gemini)**
-  - **Uso:** Asistencia en la optimización de algoritmos, refactorización de código multihilo, y estructuración de la documentación técnica.
-
-* **[Pillow (PIL Fork)](https://python-pillow.org/)**
-  - **Uso:** El motor principal de procesamiento, redimensionado y manipulación de píxeles.
-  - **Licencia:** [HPND License](https://raw.githubusercontent.com/python-pillow/Pillow/main/LICENSE) (Compatible con uso comercial).
-  - **Créditos:** Alex Clark y los contribuidores de Pillow.
-
-* **[ttkbootstrap](https://ttkbootstrap.readthedocs.io/)**
-  - **Uso:** El framework que le da la interfaz gráfica moderna, los temas oscuros y los controles avanzados (sliders, botones, barras de progreso).
-  - **Licencia:** [MIT License](https://github.com/israel-dryer/ttkbootstrap/blob/master/LICENSE).
-  - **Créditos:** Israel Dryer.
-
-* **[pillow-heif](https://github.com/bigcat88/pillow_heif)**
-  - **Uso:** El plugin que permite leer y escribir el formato de alta eficiencia de Apple (HEIC/HEIF).
-  - **Licencia:** [BSD 3-Clause License](https://github.com/bigcat88/pillow_heif/blob/master/LICENSE.txt).
-  - **Créditos:** Alexander Piskun (bigcat88).
-
-* **[pillow-avif-plugin](https://github.com/fdintino/pillow-avif-plugin)**
-  - **Uso:** El plugin que habilita la compresión y descompresión del formato web de ultra-rendimiento AVIF.
-  - **Licencia:** [MIT License](https://github.com/fdintino/pillow-avif-plugin/blob/master/LICENSE).
-  - **Créditos:** Frankie Dintino.
-
-* **Python Standard Library** (`tkinter`, `threading`, `io`, `os`, `sys`)
-  - **Uso:** Gestión del sistema de archivos, multihilo (multicore) y operaciones nativas.
-  - **Licencia:** [Python Software Foundation License](https://docs.python.org/3/license.html).
+- v1–v5: Initial formats & GUI.
+- v6–v9: Inspector, presets, non-destructive edits.
+- v10–v15: Multithreading, pixel-precise resizing, UX improvements.
