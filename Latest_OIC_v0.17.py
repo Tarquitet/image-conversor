@@ -14,7 +14,9 @@ def setup_dependencies():
         'ttkbootstrap': 'ttkbootstrap',
         'Pillow': 'PIL',
         'pillow-avif-plugin': 'pillow_avif',
-        'pillow-heif': 'pillow_heif'
+        'pillow-heif': 'pillow_heif',
+        'svglib': 'svglib',
+        'reportlab': 'reportlab'
     }
     installed = False
     for package, import_name in required_libs.items():
@@ -38,6 +40,21 @@ import pillow_avif
 import pillow_heif
 
 pillow_heif.register_heif_opener()
+
+# --- LECTOR SEGURO DE IMÁGENES (Soporte SVG) ---
+def load_image_safely(path):
+    if path.lower().endswith('.svg'):
+        from svglib.svglib import svg2rlg
+        from reportlab.graphics import renderPM
+        import io
+        drawing = svg2rlg(path)
+        buf = io.BytesIO()
+        # Renderiza el vectorial a un mapa de bits en memoria
+        renderPM.drawToFile(drawing, buf, fmt="PNG")
+        buf.seek(0)
+        return Image.open(buf)
+    else:
+        return Image.open(path)
 
 # --- CLASE INSPECTOR ---
 class AdvancedInspector(tk.Toplevel):
@@ -167,7 +184,7 @@ class ImageItem:
 class UniversalOmegaConverter:
     def __init__(self, root):
         self.root = root
-        self.root.title("Tarquitet - OMEGA Converter V0.15")
+        self.root.title("Tarquitet - OMEGA Converter V6")
         self.root.geometry("1600x980")
         
         self.items = []; self.current_item = None
@@ -250,7 +267,8 @@ class UniversalOmegaConverter:
         r1 = ttk.Frame(t1); r1.pack(fill="x", pady=5)
         f1 = ttk.Frame(r1); f1.pack(side="left", padx=(0,10))
         ttk.Label(f1, text="Fmt").pack(anchor="w")
-        cb_f = ttk.Combobox(f1, textvariable=self.var_fmt, values=["AVIF", "HEIC", "WEBP", "JPEG", "PNG", "GIF", "PSD"], state="readonly", width=6)
+        # AÑADIR ICO A LA LISTA
+        cb_f = ttk.Combobox(f1, textvariable=self.var_fmt, values=["AVIF", "HEIC", "WEBP", "JPEG", "PNG", "GIF", "PSD", "ICO"], state="readonly", width=6)
         cb_f.pack(); cb_f.bind("<<ComboboxSelected>>", self.on_ui_change)
 
         f2 = ttk.Frame(r1); f2.pack(side="left", fill="x", expand=True, padx=5)
@@ -394,17 +412,36 @@ class UniversalOmegaConverter:
 
     def process_image(self, pil_img, item):
         target = pil_img.copy()
+
+        # FIX 1: Blindar la transparencia desde el inicio. Si es una paleta (P) con transparencia,
+        # la forzamos a RGBA inmediatamente para evitar el UserWarning y la pérdida de Alpha.
+        if target.mode == "P" and "transparency" in target.info:
+            target = target.convert("RGBA")
+
         if item.rotate != 0: target = target.rotate(item.rotate, expand=True)
         if item.flip_h: target = ImageOps.mirror(target)
-        if item.force_srgb and target.mode != "P":
+        
+        # FIX 2: Mantener el Alpha vivo al forzar el perfil de color sRGB
+        if item.force_srgb and target.mode not in ["P", "L"]:
              try:
                 if "icc_profile" in target.info:
+                    has_alpha = 'A' in target.mode
+                    if has_alpha:
+                        alpha_channel = target.getchannel('A')
+                        target = target.convert('RGB')
+                        
                     srgb_profile = ImageCms.createProfile("sRGB")
                     input_profile = ImageCms.getOpenProfile(io.BytesIO(target.info["icc_profile"]))
                     target = ImageCms.profileToProfile(target, input_profile, srgb_profile)
+                    
+                    if has_alpha:
+                        target = target.convert("RGBA")
+                        target.putalpha(alpha_channel)
              except: pass
+             
         if item.grayscale: target = ImageOps.grayscale(target)
 
+        # --- REDIMENSIÓN ---
         w, h = target.size; new_w, new_h = w, h
         mode = item.resize_mode; val = item.resize_val
         if mode == "Scale %": new_w = int(w * (val / 100)); new_h = int(h * (val / 100))
@@ -415,6 +452,7 @@ class UniversalOmegaConverter:
             else: new_h = val; new_w = int(w * (val / h))
         if new_w != w or new_h != h: target = target.resize((new_w, new_h), Image.Resampling.LANCZOS)
             
+        # --- MARCA DE AGUA ---
         if item.wm_content.strip():
             if target.mode != "RGBA": target = target.convert("RGBA")
             wm_layer = Image.new("RGBA", target.size, (0,0,0,0))
@@ -444,24 +482,45 @@ class UniversalOmegaConverter:
                 except: pass
             target = Image.alpha_composite(target, wm_layer)
 
+        # --- PREPARACIÓN FINAL DE FORMATO Y FONDO ---
         fmt = item.fmt; pil_fmt = "HEIF" if fmt == "HEIC" else fmt
         no_alpha = ["JPEG", "BMP", "EPS", "PDF"]
-        if (pil_fmt in no_alpha) and target.mode in ("RGBA", "LA", "P"):
-            bg_col = (255,255,255) if item.bg=="BLANCO" else (0,0,0)
-            bg = Image.new("RGB", target.size, bg_col)
-            try: bg.paste(target, mask=target.split()[3])
-            except: bg.paste(target)
-            target = bg
-        elif target.mode == "P" and pil_fmt not in ["GIF", "PNG"]: target = target.convert("RGB")
         
+        # FIX 3: Ruteo seguro de transparencia según si el formato destino lo soporta
+        if pil_fmt in no_alpha:
+            if target.mode in ("RGBA", "LA") or (target.mode == "P" and "transparency" in target.info):
+                bg_col = (255,255,255) if item.bg=="BLANCO" else (0,0,0)
+                bg = Image.new("RGB", target.size, bg_col)
+                if target.mode == "P": target = target.convert("RGBA")
+                try: bg.paste(target, mask=target.split()[3])
+                except: bg.paste(target)
+                target = bg
+            elif target.mode != "RGB":
+                target = target.convert("RGB")
+        else:
+            # Si el formato SÍ soporta Alpha (WEBP, AVIF, ICO, PNG) aseguramos que llegue bien
+            if target.mode == "P" and pil_fmt not in ["GIF", "PNG"]:
+                target = target.convert("RGBA" if "transparency" in target.info else "RGB")
+
+        # --- EXPORTACIÓN ---
         buf = io.BytesIO(); args = {}
         q = int(item.quality)
         if item.keep_exif and pil_img.info.get("exif"): args["exif"] = pil_img.info.get("exif")
         sub = 2 if item.subsample else 0
+        
         if pil_fmt=="AVIF": args.update({"quality":q, "speed":6})
         elif pil_fmt=="JPEG": args.update({"quality":q, "optimize":True, "subsampling":sub})
         elif pil_fmt=="WEBP": args.update({"quality":q, "method":6})
-        elif pil_fmt=="PNG": args.update({"optimize":True})
+        elif pil_fmt=="PNG": 
+            args.update({"optimize":True})
+            if q < 100:
+                num_colors = max(2, int((q / 100) * 256))
+                if target.mode not in ["RGBA", "P"]: target = target.convert("RGBA")
+                try: target = target.quantize(colors=num_colors, method=Image.Quantize.MAXCOVERAGE)
+                except: target = target.quantize(colors=num_colors)
+        elif pil_fmt=="ICO":
+            if target.width > 256 or target.height > 256:
+                target.thumbnail((256, 256), Image.Resampling.LANCZOS)
         
         target.save(buf, format=pil_fmt, **args)
         return buf.getvalue()
@@ -515,7 +574,9 @@ class UniversalOmegaConverter:
         self.generate_preview()
 
     def load_image_preview(self):
-        try: self.original_image=Image.open(self.current_item.path); self.generate_preview()
+        try: 
+            self.original_image = load_image_safely(self.current_item.path)
+            self.generate_preview()
         except Exception as e: print(e)
 
     def generate_preview(self):
@@ -576,12 +637,16 @@ class UniversalOmegaConverter:
         for i, item in enumerate(self.items):
             try:
                 self.root.after(0, lambda t=f"Procesando: {item.name}": self.prog_lbl.config(text=t))
-                with Image.open(item.path) as img:
-                    b=self.process_image(img, item)
-                    base=os.path.splitext(item.name)[0]
-                    ext=item.fmt.lower().replace("jpeg","jpg")
-                    with open(os.path.join(out_dir, f"{item.prefix}{base}.{ext}"),"wb") as f: f.write(b)
-            except Exception as e: print(e)
+                # Usamos el nuevo lector en lugar de 'with Image.open(item.path) as img:'
+                img = load_image_safely(item.path)
+                b = self.process_image(img, item)
+                base = os.path.splitext(item.name)[0]
+                ext = item.fmt.lower().replace("jpeg","jpg")
+                with open(os.path.join(out_dir, f"{item.prefix}{base}.{ext}"),"wb") as f: 
+                    f.write(b)
+                img.close()
+            except Exception as e: 
+                print(e)
             self.root.after(0, lambda v=i+1: self.prog_bar.configure(value=v))
         self.root.after(0, self.finish_batch)
 

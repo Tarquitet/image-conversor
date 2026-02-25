@@ -1,50 +1,83 @@
-# 🚀 OMEGA Image Converter (v0.15)
+# 🚀 OMEGA Image Converter (v0.17)
 
-> **A professional suite for inspection, multithreaded optimization, non-destructive edits and bulk image conversion.**
+> **A professional desktop suite for inspection, multithreaded optimization, non-destructive edits and bulk image conversion.**
 
-OMEGA Image Converter is an advanced desktop tool written in Python for creators who need fine-grained control over image compression and conversion (including modern formats like AVIF and HEIC).
+The **OMEGA Image Converter** is an advanced GUI tool written in Python. It is designed for content creators, web developers and designers who need granular control over image compression, supporting everything from standard formats to modern formats such as AVIF and HEIC.
 
 ![1770839881735 a](images/README/1770839881735.png)
 
-## ✨ Main Features (v15)
+![1769207328325 b](images/README/1769207328325.avif)
 
-- **Exact Pixel Resizing:** Control final dimensions by exact pixels (width × height).
-- **Multithreaded Processing:** Uses all CPU cores for fast batch conversion.
-- **Advanced Visual Inspector:** Side-by-side comparison with curtain effect and pixel-level zoom.
-- **Presets System:** Save export settings in `presets.json`.
-- **Watermark/Logo Insertion:** Add PNG logos or text with opacity control.
-- **Extreme Optimization:** Supports chroma subsampling (4:2:0) to reduce weight for web.
+![1769206967488 c](images/README/1769206967488.avif)
 
-## Supported Formats
+![1769206951282 d](images/README/1769206951282.avif)
 
-- AVIF, HEIC, WEBP, JPEG/JPG, PNG, GIF, PSD, PDF, EPS, TIFF, BMP, ICO, JPEG2000
+## ✨ Main Features (Updated v17)
 
----
+- **📏 Exact Pixel Resizing:** Full control over the final size. Change dimensions by specifying the exact Width and Height in pixels, replacing the old percentage-based method.
+- **🚀 Multithreaded (Multi-core) Processing:** Use all CPU cores to convert very large batches of images at optimized speed.
+- **🔍 Advanced Visual Inspector (Curtain Mode):** Compare the original and the result pixel-by-pixel with a curtain effect, dynamic zoom and full analytics on click.
+- **🧹 Advanced Queue Management:** Remove specific images from the work queue individually with a single click.
+- **💾 Presets System:** Save your favorite configurations in a `presets.json` file for instant reuse.
+- **©️ Logo and Watermark Insertion:** Add PNG logos or text with customizable opacity to your exports.
+- **📦 Extreme Optimization:** Support for chroma subsampling (Chroma 4:2:0) to drastically reduce image weight and visual reports showing the exact percentage of savings.
+
+## 🗂️ Supported Formats
+
+| Modern Web Formats           | Classic Formats        | Design Formats       |
+| :--------------------------- | :--------------------- | :------------------- |
+| **AVIF** (Ultra compression) | **JPEG / JPG**         | **PSD** (Photoshop)  |
+| **HEIC** (Apple/iOS)         | **PNG** (Transparency) | **PDF** (Document)   |
+| **WEBP** (Google)            | **GIF** (Animated)     | **EPS** (PostScript) |
+| **JPEG 2000**                | **BMP / ICO**          | **TIFF / TGA**       |
 
 ## ⚙️ Requirements & Installation
 
+The script includes an **Auto-Installer**. On first run it will attempt to automatically download required dependencies.
+
+**System requirements:**
+
 - Python 3.8 or newer.
 
-The tool includes an auto-installer that will fetch required packages on first run.
+**Dependencies (installed automatically):**
 
-**Dependencies:** `ttkbootstrap`, `Pillow`, `pillow-avif-plugin`, `pillow-heif`.
+- `ttkbootstrap` (modern GUI)
+- `Pillow` (core image processing)
+- `pillow-avif-plugin` (AVIF support)
+- `pillow-heif` (HEIC support)
 
-Run:
+### Run
 
 ```bash
 python Latest_<NAME>_<VERSION>.py
 ```
 
-[![Leer en Español](https://img.shields.io/badge/Leer%20en%20Espa%C3%B1ol-ES-blue?style=flat-square&logo=github)](README_es.md)
+## 📖 Quick Usage Guide
 
-## Quick Usage
+1. **Add & Clean:** Click `➕ Add` to select images. If you pick the wrong file, use the individual `❌` to remove it from the list.
+2. **Set Dimensions & Quality:** Select an image and set its new width/height in pixels. To apply this to the whole batch, use `⚡ APPLY GLOBAL`.
+3. **Inspect Savings:** Check the info bar to see the exact percentage of weight saved. Click `Preview` to open the **Omega Inspector** fullscreen.
+4. **Multithreaded Export:** Choose your output folder and press `🚀 PROCESS BATCH`. The multithreaded engine will process images in parallel.
 
-- Add images with ➕. Remove wrong entries with ❌.
-- Configure dimensions or apply global presets.
-- Preview savings and run batch export.
+## 📈 Project Evolution (Changelog)
 
-## Changelog
+- **v1–v5:** Initial format support, basic GUI and conversion capabilities.
+- **v6–v9:** Implemented the Inspector with zoom and curtain effect, presets in `presets.json` and non-destructive edits.
+- **v10:** Improved web color support and ability to overlay PNG logos.
+- **v11:** Advanced display of compression metrics (savings percentage) in the UI.
+- **v12:** Integrated the Multicore engine for parallel processing and faster batch speeds.
+- **v13–v14:** UX improvements to allow closing and removing individual images from the work queue.
+- **v15:** Scaling system change: moved from percentage-based resizing to exact pixel control (Width × Height).
+- **v16:** Fixes and improvements for PNG and SVG support; better transparency handling and reduction of export artifacts.
+- **v17 (Current):** Fixed transparency issues in WebP/AVIF, hardened the export pipeline and minor stability improvements.
 
-- v1–v5: Initial formats & GUI.
-- v6–v9: Inspector, presets, non-destructive edits.
-- v10–v15: Multithreading, pixel-precise resizing, UX improvements.
+### 💡 Tips
+
+- **Use Multithreading:** For folders with hundreds of photos, version 15 will drastically reduce your waiting time.
+- **Web Core Vitals:** For the web, export in **AVIF** with **Save Mode (4:2:0)** for better PageSpeed scores.
+
+## ⚖️ Credits & Licenses
+
+This project uses open-source libraries such as `Pillow`, `ttkbootstrap`, `pillow-heif` and `pillow-avif-plugin`.
+
+[![Read in Spanish](https://img.shields.io/badge/Read%20in%20Spanish-ES-blue?style=flat-square&logo=github)](README_es.md)
